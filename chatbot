@@ -70,7 +70,7 @@ beginDialog:
                   actions:
                     - kind: SendActivity
                       id: sendActivity_JfzhuS
-                      activity: Dès le 23 juin 2025, il y aura du changement sur toutes les lignes d’autobus de Saint-Jérôme, Saint-Canut et Mirabel-en-Haut. On améliore le réseau pour vous offrir plus de choix et mieux répondre aux besoins de la communauté. Consultez notre outil [juste ici](https://exo.quebec/nouveau-trajet)  pour connaître votre nouveau numéro d’autobus et localiser votre arrêt sur la nouvelle carte.
+                      activity: ADès le 23 juin 2025, il y aura du changement sur toutes les lignes d’autobus de Saint-Jérôme, Saint-Canut et Mirabel-en-Haut. On améliore le réseau pour vous offrir plus de choix et mieux répondre aux besoins de la communauté. Consultez notre outil [juste ici](https://exo.quebec/nouveau-trajet)  pour connaître votre nouveau numéro d’autobus et localiser votre arrêt sur la nouvelle carte.
 
                 - id: conditionItem_wjJls4
                   condition: =Topic.Var2 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.5io2RM'.'Trouver ma ligne ou mon arrêt'
