@@ -1,0 +1,440 @@
+kind: AdaptiveDialog
+beginDialog:
+  kind: OnConversationStart
+  id: main
+  actions:
+    - kind: SendActivity
+      id: sendMessage_M0LuhV
+      activity:
+        text:
+          - Bonjour! 😊
+        speak:
+          - Merci d’avoir appelé. Comment puis-je vous aider ?
+
+    - kind: Question
+      id: question_HDiDBN
+      interruptionPolicy:
+        allowInterruption: true
+
+      variable: Topic.Var1
+      prompt: De grands changements s’en viennent pour le réseau d'autobus Laurentides Nord. Vous avez des questions à ce sujet?
+      entity:
+        kind: EmbeddedEntity
+        definition:
+          kind: ClosedListEntity
+          items:
+            - id: Oui
+              displayName: Oui
+
+            - id: Non
+              displayName: Non
+
+        displayName: EmbeddedEntity-AHey83
+
+    - kind: ConditionGroup
+      id: conditionGroup_mHxvQV
+      conditions:
+        - id: conditionItem_iBcX3e
+          condition: =Topic.Var1 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_HDiDBN'.Oui
+          actions:
+            - kind: Question
+              id: 5io2RM
+              interruptionPolicy:
+                allowInterruption: true
+
+              alwaysPrompt: false
+              variable: init:Topic.Var2
+              prompt: Veuillez sélectionner le sujet qui vous intéresse.
+              entity:
+                kind: EmbeddedEntity
+                definition:
+                  kind: ClosedListEntity
+                  items:
+                    - id: La refonte du réseau
+                      displayName: La refonte du réseau
+
+                    - id: Trouver ma ligne ou mon arrêt
+                      displayName: Trouver ma ligne ou mon arrêt
+
+                    - id: Modes de transport affectés
+                      displayName: Modes de transport affectés
+
+                    - id: Titres de transport et tarifs
+                      displayName: Titres de transport et tarifs
+
+            - kind: ConditionGroup
+              id: conditionGroup_PdWLjK
+              conditions:
+                - id: conditionItem_uvYJxp
+                  condition: =Topic.Var2 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.5io2RM'.'La refonte du réseau'
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_JfzhuS
+                      activity: Dès le 23 juin 2025, il y aura du changement sur toutes les lignes d’autobus de Saint-Jérôme, Saint-Canut et Mirabel-en-Haut. On améliore le réseau pour vous offrir plus de choix et mieux répondre aux besoins de la communauté. Consultez notre outil [juste ici](https://exo.quebec/nouveau-trajet)  pour connaître votre nouveau numéro d’autobus et localiser votre arrêt sur la nouvelle carte.
+
+                - id: conditionItem_wjJls4
+                  condition: =Topic.Var2 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.5io2RM'.'Trouver ma ligne ou mon arrêt'
+                  actions:
+                    - kind: Question
+                      id: question_BTbL7x
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      variable: init:Topic.Var4
+                      prompt: Veuillez sélectionner le sujet qui vous intéresse.
+                      entity:
+                        kind: EmbeddedEntity
+                        definition:
+                          kind: ClosedListEntity
+                          items:
+                            - id: Trouver ma ligne
+                              displayName: Trouver ma ligne
+
+                            - id: Trouver mon arrêt
+                              displayName: Trouver mon arrêt
+
+                    - kind: ConditionGroup
+                      id: conditionGroup_6xq1lX
+                      conditions:
+                        - id: conditionItem_OjH2H0
+                          condition: =Topic.Var4 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_BTbL7x'.'Trouver ma ligne'
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_ZU5uFT
+                              activity: Tous les tracés ont été revus. Pour identifier votre nouvelle ligne, utilisez l’outil interactif disponible à [exo.quebec/nouveau-trajet](https://exo.quebec/nouveau-trajet). Entrez votre adresse de départ et celle de votre destination pour obtenir l'itinéraire le plus rapide avec les bonnes correspondances.
+
+                        - id: conditionItem_RvwuBk
+                          condition: =Topic.Var4 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_BTbL7x'.'Trouver mon arrêt'
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_qq4OwA
+                              activity: "Le réseau a été optimisé: certains arrêts ont changé. Consultez la carte interactive sur [exo.quebec](https://exo.quebec/)pour voir si votre arrêt est concerné."
+
+                - id: conditionItem_HyszCU
+                  condition: =Topic.Var2 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.5io2RM'.'Modes de transport affectés'
+                  actions:
+                    - kind: Question
+                      id: question_iPMcfm
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      variable: init:Topic.Var6
+                      prompt: Sélectionnez l'élément qui vous convient.
+                      entity:
+                        kind: EmbeddedEntity
+                        definition:
+                          kind: ClosedListEntity
+                          items:
+                            - id: Autobus
+                              displayName: Autobus
+
+                            - id: Train
+                              displayName: Train
+
+                            - id: Taxi collectif
+                              displayName: Taxi collectif
+
+                            - id: REM
+                              displayName: REM
+
+                            - id: Transport adapté
+                              displayName: Transport adapté
+
+                            - id: Accessibilité
+                              displayName: Accessibilité
+
+                    - kind: ConditionGroup
+                      id: conditionGroup_0uTdxt
+                      conditions:
+                        - id: conditionItem_xDJTGY
+                          condition: =Topic.Var6 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_iPMcfm'.Autobus
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_yXwpi4
+                              activity: "Le nouveau réseau touche uniquement les lignes d’autobus. On a modifié certains itinéraires, changé des numéros de lignes et déplacé ou supprimé quelques arrêts. Les horaires et trajets actualisés sont disponibles sur cet outil : [exo.quebec/nouveau-trajet](https://exo.quebec/nouveau-trajet)"
+
+                        - id: conditionItem_HaCE3Y
+                          condition: =Topic.Var6 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_iPMcfm'.Train
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_1yDdWW
+                              activity: |-
+                                Les correspondances entre la gare de Saint-Jérôme et les bus sont effectives pour les départs du train de 6h10, 6h35, 7h10, 7h30, 8h38, 17h41, 18h50, 20h35 et 21h39. En dehors de ces heures, les horaires des bus ne sont pas arrimés avec ceux du train.
+                                Consultez les horaires sur  exo.quebec pour planifier votre trajet en toute sérénité.
+
+                        - id: conditionItem_S3J8FJ
+                          condition: =Topic.Var6 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_iPMcfm'.'Taxi collectif'
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_VCnzjn
+                              activity: Vous n’aurez plus besoin de réserver un taxi collectif pour vous rendre dans les quartiers Saint-Canut et Mirabel-en-Haut à Mirabel puisque les lignes d’autobus 238 ou 239 vous y emmèneront.
+
+                        - id: conditionItem_j3gC0a
+                          condition: =Topic.Var6 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_iPMcfm'.REM
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_IxudWc
+                              activity: Aucune liaison directe au REM n'est prévue depuis le réseau Laurentides Nord. Toutefois, des correspondances vers les stations les plus proches sont possibles via certains trajets d’autobus. Consultez [exo.quebec/nouveau-trajet](https://exo.quebec/nouveau-trajet)pour voir les meilleures options en fonction de votre point de départ.
+
+                        - id: conditionItem_iBWP0G
+                          condition: =Topic.Var6 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_iPMcfm'.'Transport adapté'
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_0gKSOv
+                              activity: Le service de transport adapté fonctionne comme d’habitude.  Pour réserver un trajet occasionnel, connectez-vous à votre [compte exo](https://connexion.exo.quebec/exossoprod.onmicrosoft.com/b2c_1a_signup_signin/oauth2/v2.0/authorize?client_id=eb1a509c-9a52-419a-9bb0-fcec01919517&response_type=id_token%20token&scope=openid%20profile%20offline_access%20https%3A%2F%2Fexossoprod.onmicrosoft.com%2Feb1a509c-9a52-419a-9bb0-fcec01919517%2FApi.Read%20https%3A%2F%2Fexossoprod.onmicrosoft.com%2Feb1a509c-9a52-419a-9bb0-fcec01919517%2FApi.Write&state=OpenIdConnect.AuthenticationProperties%3D2y02dNdFc3rDuGvm0kyydOOaEuD_Rzg3OzW5Y7sA236MHsJOrS_T371jWul2oWH7sydkSuOSFoyuAj4KWaMRjVt-AKj5vGlaB498o3Ytryb0vJDnJeFI3zFwtog3HVGIs_bMMTwqyzKMjAJNTqd0nkUVVrGUutBhbClwBoGA0pTbvOa-oARf9b5CWi-HSu3RtcwJqeIOjXsSvh9m-btz__aoRbm4ldNbJ_C7uAwprhvr3tUXydYEGme3r8ewvpI3TixDMAT7uF5jJXycj1HPeA&response_mode=form_post&nonce=638780016758494217.ODUzNjU2NTQtOTI5Ni00MjBjLTg1YTctNGI2MzhlYzZhYjQ0ZWU3YzdiNDAtZDMwZi00ZDMzLWI5Y2MtNTI0NmU3NmE1YzIx&ui_locales=fr&redirect_uri=https%3A%2F%2Fexo.quebec%2Ffr&x-client-SKU=ID_NET461&x-client-ver=5.3.0.0) ou appelez-nous au 1 877 433-4004.
+
+                        - id: conditionItem_KfMsyH
+                          condition: =Topic.Var6 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_iPMcfm'.Accessibilité
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_FrDcCX
+                              activity: L’accessibilité est une priorité dans l'évolution du réseau. Pour le moment, les quais d’embarquement ne permettent pas aux personnes en fauteuil roulant d’embarquer dans les autobus. Nous sommes conscients de cet enjeu et travaillons à rendre notre réseau plus accessible. Des ajustements sont prévus dans les prochaines années. Vérifiez l’accessibilité de votre trajet via l’outil de planification sur exo.quebec.
+
+                - id: conditionItem_olVbLh
+                  condition: =Topic.Var2 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.5io2RM'.'Titres de transport et tarifs'
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_kSRqr1
+                      activity: Les titres de transport actuels restent valides, mais une révision tarifaire entrera en vigueur le 1er juillet 2025. Pour les résidents de 65 ans et plus de Saint-Jérôme, le titre bus (zones A, B et C) est toujours gratuit. Consultez la section « Refonte tarifaire » sur exo.quebec pour plus de détails.
+
+            - kind: Question
+              id: question_ad4kCk
+              interruptionPolicy:
+                allowInterruption: true
+
+              variable: init:Topic.Var3
+              prompt: Est-ce que cette réponse vous a-t-elle été utile?
+              entity:
+                kind: EmbeddedEntity
+                definition:
+                  kind: ClosedListEntity
+                  items:
+                    - id: Oui
+                      displayName: Oui
+
+                    - id: Non
+                      displayName: Non
+
+            - kind: ConditionGroup
+              id: conditionGroup_G3Qq6D
+              conditions:
+                - id: conditionItem_jc4Qcb
+                  condition: =Topic.Var3 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_ad4kCk'.Oui
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_fW5DIF
+                      activity: "Super! Si vous voulez rester au courant des prochaines nouveautés, nous vous invitons à vous inscrire à notre [infolettre dédiée](https://exo.quebec/fr/planifier-trajet/refonte-reseau-autobus/laurentides-nord#infolettre). Vous recevrez toute l’information sur la refonte et ce qui s’en vient."
+
+                - id: conditionItem_PDOCbN
+                  condition: =Topic.Var3 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_ad4kCk'.Non
+                  actions:
+                    - kind: Question
+                      id: Luluq2
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      variable: Topic.Var8
+                      prompt: Désolée de l'entendre. J’aimerais comprendre ce qui manque pour mieux vous répondre. Vous pouvez me l'expliquer?
+                      entity: StringPrebuiltEntity
+
+                    - kind: SendActivity
+                      id: sendActivity_SiR2zT
+                      activity: J'ai bien noté vos retours. 
+
+                    - kind: Question
+                      id: question_PlF4D0
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      variable: init:Topic.Var5
+                      prompt: Aimeriez-vous contacter le service à la clientèle?
+                      entity:
+                        kind: EmbeddedEntity
+                        definition:
+                          kind: ClosedListEntity
+                          items:
+                            - id: Oui
+                              displayName: Oui
+
+                            - id: Non
+                              displayName: Non
+
+                    - kind: ConditionGroup
+                      id: wC46bs
+                      conditions:
+                        - id: conditionItem_FhjrjY
+                          condition: =Topic.Var5 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_PlF4D0'.Oui
+                          actions:
+                            - kind: SetVariable
+                              id: MoYlBU
+                              variable: Topic.heurenow
+                              value: =TimeValue(Now())
+
+                            - kind: ConditionGroup
+                              id: BXSDO9
+                              conditions:
+                                - id: kIPnge
+                                  condition: =Topic.heurenow >= TimeValue("6:00:00:000") && Topic.heurenow <= TimeValue("11:59:00:000")
+                                  displayName: Clavardage ouvert matin
+                                  actions:
+                                    - kind: SendActivity
+                                      id: FL2yAm
+                                      activity: Notre équipe n’est pas disponible pour le moment, mais on reste joignables de 12h à 16h30, 7 jours sur 7, via ce chat. Vous pouvez toujours nous contacter via [notre formulaire en ligne](https://exo.quebec/fr/service-clientele/contact)
+
+                                - id: conditionItem_QAXqzR
+                                  condition: =Topic.heurenow >= TimeValue("12:00:00:000") && Topic.heurenow <= TimeValue("16:30:00:000")
+                                  displayName: CRC Ouvert
+                                  actions:
+                                    - kind: Question
+                                      id: nRnLzG
+                                      interruptionPolicy:
+                                        allowInterruption: true
+
+                                      variable: Topic.Var10
+                                      prompt: Vous aimeriez parler à un agent? On peut vous mettre en contact tout de suite!
+                                      entity:
+                                        kind: EmbeddedEntity
+                                        definition:
+                                          kind: ClosedListEntity
+                                          items:
+                                            - id: Oui
+                                              displayName: Oui
+
+                                            - id: Non
+                                              displayName: Non
+
+                                    - kind: ConditionGroup
+                                      id: de1P02
+                                      conditions:
+                                        - id: JRq74z
+                                          condition: =Topic.Var10 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.nRnLzG'.Oui
+                                          actions:
+                                            - kind: SendActivity
+                                              id: Nb3JJi
+                                              activity: Un agent sera bientôt disponible pour discuter avec vous.
+
+                                            - kind: TransferConversationV2
+                                              id: QxB4IM
+                                              transferType:
+                                                kind: TransferToAgent
+                                                messageToAgent: Contact provenant du chat refonte des réseaux.
+                                                context:
+                                                  kind: AutomaticTransferContext
+
+                                        - id: 0ED6Kj
+                                          condition: =Topic.Var10 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.nRnLzG'.Non
+                                          actions:
+                                            - kind: SendActivity
+                                              id: 4BwY0K
+                                              activity: Vous pouvez toujours nous contacter via [notre formulaire en ligne.](https://exo.quebec/fr/service-clientele/contact)
+
+                                - id: conditionItem_274JNL
+                                  condition: =Topic.heurenow >= TimeValue("16:30:00:000") && Topic.heurenow <= TimeValue("20:30:00:000")
+                                  displayName: Clavardage ouvert soir
+                                  actions:
+                                    - kind: SendActivity
+                                      id: phG8t3
+                                      activity: Notre équipe n’est pas disponible pour le moment, mais on reste joignables de 12h à 16h30, 7 jours sur 7, via ce chat. Vous pouvez toujours nous contacter via [notre formulaire en ligne](https://exo.quebec/fr/service-clientele/contact)
+
+                                - id: conditionItem_r3lq8C
+                                  condition: =Topic.heurenow >= TimeValue("20:30:00:000") && Topic.heurenow <= TimeValue("06:30:00:000")
+                                  displayName: CRC fermé
+                                  actions:
+                                    - kind: SendActivity
+                                      id: N8IWmY
+                                      activity: Notre équipe n’est pas disponible pour le moment, mais on reste joignables! Vous pouvez toujours nous contacter via [notre formulaire en ligne](https://exo.quebec/fr/service-clientele/contact)
+
+                        - id: conditionItem_yfxldl
+                          condition: =Topic.Var5 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_PlF4D0'.Non
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_II5HlX
+                              activity: Merci d'avoir utiliser notre chabot. 
+
+                            - kind: EndConversation
+                              id: v1ru7Y
+
+        - id: conditionItem_RgyDAk
+          condition: =Topic.Var1 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_HDiDBN'.Non
+          actions:
+            - kind: SetVariable
+              id: setVariable_y19rz4
+              variable: Topic.heurenow
+              value: =TimeValue(Now())
+
+            - kind: ConditionGroup
+              id: conditionGroup_7V0Egv
+              conditions:
+                - id: conditionItem_5DN1OY
+                  condition: =Topic.heurenow >= TimeValue("6:00:00:000") && Topic.heurenow <= TimeValue("11:59:00:000")
+                  displayName: Clavardage ouvert matin
+                  actions:
+                    - kind: SendActivity
+                      id: sendActivity_MfmeTa
+                      activity: Notre équipe n’est pas disponible pour le moment, mais on reste joignables de 12h à 16h30, 7 jours sur 7, via ce chat. Vous pouvez toujours nous contacter via [notre formulaire en ligne](https://exo.quebec/fr/service-clientele/contact)
+
+                - id: conditionItem_SLaKgJ
+                  condition: =Topic.heurenow >= TimeValue("12:00:00:000") && Topic.heurenow <= TimeValue("16:30:00:000")
+                  displayName: Condition - CRC ouvert
+                  actions:
+                    - kind: Question
+                      id: question_b41KKQ
+                      interruptionPolicy:
+                        allowInterruption: true
+
+                      variable: Topic.Var7
+                      prompt: Vous aimeriez parler à un agent? On peut vous mettre en contact tout de suite!
+                      entity:
+                        kind: EmbeddedEntity
+                        definition:
+                          kind: ClosedListEntity
+                          items:
+                            - id: Oui
+                              displayName: Oui
+
+                            - id: Non
+                              displayName: Non
+
+                    - kind: ConditionGroup
+                      id: conditionGroup_pzCw9N
+                      conditions:
+                        - id: conditionItem_Dzuafi
+                          condition: =Topic.Var7 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_b41KKQ'.Oui
+                          actions:
+                            - kind: SendActivity
+                              id: sendActivity_qguRLg
+                              activity: Un agent sera bientôt disponible pour discuter avec vous.
+
+                            - kind: TransferConversationV2
+                              id: 2nhiHS
+                              transferType:
+                                kind: TransferToAgent
+                                messageToAgent: Contact provenant du chat refonte des réseaux.
+                                context:
+                                  kind: AutomaticTransferContext
+
+                        - id: conditionItem_Rj0Gko
+                          condition: =Topic.Var7 = 'cr5e1_Clavardage_Francais.topic.Greeting.main.question_b41KKQ'.Non
+                          actions:
+                            - kind: SendActivity
+                              id: 9YR1oe
+                              activity: Vous pouvez toujours nous contacter via [notre formulaire en ligne.](https://exo.quebec/fr/service-clientele/contact)
+
+                - id: conditionItem_InUWRv
+                  condition: =Topic.heurenow > TimeValue("16:30:00:000") && Topic.heurenow <= TimeValue("20:30:00:000")
+                  displayName: Clavardage ouvert soir
+                  actions:
+                    - kind: SendActivity
+                      id: a33CXm
+                      activity: Notre équipe n’est pas disponible pour le moment, mais on reste joignables de 12h à 16h30, 7 jours sur 7, via ce chat. Vous pouvez toujours nous contacter via [notre formulaire en ligne](https://exo.quebec/fr/service-clientele/contact)
+
+                - id: conditionItem_GZ6HFS
+                  condition: =Topic.heurenow > TimeValue("20:30:00:000") && Topic.heurenow < TimeValue("6:30:00:000")
+                  displayName: CRC fermé
+                  actions:
+                    - kind: SendActivity
+                      id: RVaKXT
+                      activity: Notre équipe n’est pas disponible pour le moment, mais on reste joignables! Vous pouvez toujours nous contacter via [notre formulaire en ligne](https://exo.quebec/fr/service-clientele/contact)
+
+            - kind: EndDialog
+              id: ViFNw8
