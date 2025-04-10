@@ -360,7 +360,16 @@ beginDialog:
             - kind: SetVariable
               id: setVariable_y19rz4
               variable: Topic.heurenow
-              value: =TimeValue(Now())
+              value: =System.Conversation.LocalTimeZoneOffset
+
+            - kind: SetVariable
+              id: setVariable_lxyUPz
+              variable: Topic.localtime
+              value: =DateAdd(Now(), -4, TimeUnit.Hours)
+
+            - kind: SendActivity
+              id: sendActivity_GVxJqi
+              activity: Enter the message "The current date and time is {Topic.localtime}
 
             - kind: ConditionGroup
               id: conditionGroup_7V0Egv
